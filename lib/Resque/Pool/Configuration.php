@@ -78,7 +78,7 @@ class Configuration
     /**
      * @param string
      */
-    public $workerClass = '\\Resque_Worker';
+    public $workerClass = '\\Resque\\Worker';
     /**
      * @param integer
      */
@@ -194,7 +194,6 @@ class Configuration
     {
         if ($this->queueConfigFile) {
             $this->logger->log("Loading config file: {$this->queueConfigFile}");
-            Yaml::enablePhpParsing();
             try {
                 $this->queueConfig = Yaml::parse($this->queueConfigFile);
             } catch (ParseException $e) {
