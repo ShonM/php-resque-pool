@@ -126,7 +126,7 @@ class Cli
             mkdir($piddir, 0777, true);
         }
 
-        file_put_contents($pidfile, getmypid(), LOCK_EX);
+        file_put_contents($pidfile, getmypid());
         register_shutdown_function(function() use ($pidfile) {
             if (getmypid() === file_get_contents($pidfile)) {
                 unlink($pidfile);
@@ -138,7 +138,7 @@ class Cli
     {
         $oldPid = trim(file_get_contents($pidfile));
 
-        return posix_kill($oldPid, 0);
+        return posix_kill((int) $oldPid, 0);
     }
 
     public function buildConfiguration(array $options)
