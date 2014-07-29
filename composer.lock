@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f39de8970a518b817be169e1594cbf25",
+    "hash": "223a625fc06dfe79a8d4b5f6415dead1",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -47,16 +47,16 @@
         },
         {
             "name": "shonm/php-resque",
-            "version": "dev-master",
+            "version": "dev-fastcgi",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
-                "reference": "08fb6f2af435bce08e133cc42c26c985f5c5a850"
+                "reference": "a5815f55525e4ca1589038ba2c11eb208e727ff3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/08fb6f2af435bce08e133cc42c26c985f5c5a850",
-                "reference": "08fb6f2af435bce08e133cc42c26c985f5c5a850",
+                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/a5815f55525e4ca1589038ba2c11eb208e727ff3",
+                "reference": "a5815f55525e4ca1589038ba2c11eb208e727ff3",
                 "shasum": ""
             },
             "require": {
@@ -98,7 +98,7 @@
                 "redis",
                 "resque"
             ],
-            "time": "2013-06-03 16:39:55"
+            "time": "2013-06-03 16:38:55"
         },
         {
             "name": "symfony/yaml",
