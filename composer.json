@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "symfony/yaml": "2.1.*",
+        "symfony/yaml": "2.*",
         "shonm/php-resque": "dev-master"
     },
     "require-dev": {
