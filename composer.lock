@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "223a625fc06dfe79a8d4b5f6415dead1",
+    "hash": "b77e42c47106d12e5cc80482ca1e2d9f",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -51,12 +51,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
-                "reference": "a5815f55525e4ca1589038ba2c11eb208e727ff3"
+                "reference": "02240e0f8ce1933a5dca540401c419e0577131ee"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/ShonM/php-resque/zipball/a5815f55525e4ca1589038ba2c11eb208e727ff3",
-                "reference": "a5815f55525e4ca1589038ba2c11eb208e727ff3",
+                "reference": "02240e0f8ce1933a5dca540401c419e0577131ee",
                 "shasum": ""
             },
             "require": {
@@ -98,7 +98,7 @@
                 "redis",
                 "resque"
             ],
-            "time": "2013-06-03 16:38:55"
+            "time": "2014-07-29 23:40:44"
         },
         {
             "name": "symfony/yaml",
