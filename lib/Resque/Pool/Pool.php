@@ -140,7 +140,7 @@ class Pool
             $delta = $this->workerDeltaFor($queues);
             if ($delta > 0) {
                 while ($delta-- > 0) {
-                    $this->spawnWorker($queues);
+                    $this->spawnWorker($queues, $this->config->queueOptions($queues));
                 }
             } elseif ($delta < 0) {
                 $pids = array_slice($this->pidsFor($queues), 0, -$delta);
@@ -256,7 +256,7 @@ class Pool
      *       can share the compiled code between workers.  Some investigation into the facts
      *       would be usefull
      */
-    protected function spawnWorker($queues)
+    protected function spawnWorker($queues, array $options = array())
     {
         $pid = $this->platform->pcntl_fork();
         if ($pid === -1) {
@@ -264,7 +264,7 @@ class Pool
             $this->platform->exit(1);
         } elseif ($pid === 0) {
             $this->platform->releaseSignals();
-            $worker = $this->createWorker($queues);
+            $worker = $this->createWorker($queues, $options);
             $this->logger->logWorker("Starting worker $worker");
             $this->logger->procline("Starting worker $worker");
             $this->callAfterPrefork($worker);
@@ -282,16 +282,52 @@ class Pool
         }
     }
 
-    protected function createWorker($queues)
+    protected function createWorker($queues, array $options = array())
     {
         $queues = explode(',', $queues);
         $class = $this->config->workerClass;
         $worker = new $class($queues);
+
         if ($this->config->logLevel === Configuration::LOG_VERBOSE) {
             $worker->logLevel = \Resque_Worker::LOG_VERBOSE;
         } elseif ($this->config->logLevel === Configuration::LOG_NORMAL) {
             $worker->logLevel = \Resque_Worker::LOG_NORMAL;
         }
+
+        $jobStrategy = isset($options['strategy']) ? $options['strategy'] : 'fork';
+        switch($jobStrategy) {
+            case 'fork':
+                $jobStrategy = new \Resque_JobStrategy_Fork();
+                break;
+            case 'fastcgi':
+                if (! isset($options['fastcgi_worker'])) {
+                    throw new \InvalidArgumentException('The fastcgi strategy requires a fastcgi_worker key be defined with a valid filename');
+                }
+
+                if (! isset($options['base_dir'])) {
+                    throw new \InvalidArgumentException('The fastcgi strategy requires a base_dir key be defined with a valid app root');
+                }
+
+                $fastcgiWorker = (! empty($options['fastcgi_worker'])) ? $options['fastcgi_worker'] : __DIR__ . '/../fastcgi_worker.php';
+
+                $jobStrategy = new \Resque_JobStrategy_Fastcgi(
+                    '127.0.0.1:9000',
+                    realpath($fastcgiWorker),
+                    array(
+                        'BASE_DIR'    => $options['base_dir'],
+                        'ENVIRONMENT' => $this->config->environment,
+                    )
+                );
+                break;
+            case 'inprocess':
+                $jobStrategy = new \Resque_JobStrategy_InProcess();
+                break;
+            default:
+                throw new \InvalidArgumentException('The job strategy ' . $jobStrategy . ' does not exist');
+                break;
+        }
+
+        $worker->setJobStrategy($jobStrategy);
 
         return $worker;
     }

@@ -89,6 +89,8 @@ class Configuration
      */
     protected $queueConfig;
 
+    protected $queueOptions;
+
     /**
      * @param array|string|null $config   Either a configuration array, path to yml
      *                                    file containing config, or null
@@ -117,9 +119,28 @@ class Configuration
             $this->chooseConfigFile();
             $this->loadQueueConfig();
         }
+
         if ($this->environment && isset($this->queueConfig[$this->environment])) {
             $this->queueConfig = $this->queueConfig[$this->environment] + $this->queueConfig;
         }
+
+        foreach ($this->queueConfig as $queue => $config) {
+            // A standard queue configuration, like "foo: 2"
+            if (! is_array($config)) {
+                continue;
+            }
+
+            if (isset($queue['workers'])) {
+                $this->queueConfig[$queue] = $config['workers'];
+            } else {
+                throw new \InvalidArgumentException('Configured pool queues must have a worker count defined');
+            }
+
+            if (isset($queue['options'])) {
+                $this->queueOptions[$queue] = $config['options'];
+            }
+        }
+
         // filter out the environments
         $this->queueConfig = array_filter($this->queueConfig, 'is_integer');
         $this->logger->log("Configured queues: " . implode(" ", $this->knownQueues()));
@@ -149,6 +170,15 @@ class Configuration
     public function queueConfig()
     {
         return $this->queueConfig;
+    }
+
+    public function queueOptions($queue = null)
+    {
+        if ($queue) {
+            return $this->queueOptions[$queue];
+        }
+
+        return $this->queueOptions;
     }
 
     /**
@@ -200,9 +230,10 @@ class Configuration
                 $msg = "Invalid config file: ".$e->getMessage();
                 $this->logger->log($msg);
 
-                throw new RuntimeException($msg, 0, $e);
+                throw new \RuntimeException($msg, 0, $e);
             }
         }
+
         if (!$this->queueConfig) {
             $this->logger->log('No configuration loaded.');
             $this->queueConfig = array();
