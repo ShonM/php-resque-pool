@@ -31,7 +31,6 @@ class ConfigurationTest extends BaseTestCase
             'development' => array('baz' => 14, 'foo,bar' => 16),
         );
         $configFile = 'test/misc/resque-pool.yml';
-        $customConfigFile = 'test/misc/resque-pool-custom.yml.php';
 
         $testEnv = function() { putenv('RESQUE_ENV=test'); };
         $devEnv  = function() { putenv('RESQUE_ENV=development'); };
@@ -109,11 +108,7 @@ class ConfigurationTest extends BaseTestCase
                 $test->assertEquals(0, $subject->workerCount('foo,bar'), $msg);
                 $test->assertEquals(0, $subject->workerCount('baz'), $msg);
             }),
-            array($customConfigFile, $noEnv, function($test, $subject) {
-                $test->assertEquals(2, $subject->workerCount('foo'), 'when there is php in the yaml it should be parsed');
-            }),
         );
-
     }
 
     /**

@@ -17,11 +17,11 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "symfony/yaml": "2.*",
-        "shonm/php-resque": "dev-fastcgi#02240e0f8ce1933a5dca540401c419e0577131ee"
+        "symfony/yaml": "2.7",
+        "shonm/php-resque": "dev-fastcgi"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*@dev"
+        "phpunit/phpunit": "4.1.*"
     },
     "autoload": {
         "psr-0": { "Resque\\Pool": "lib/" }

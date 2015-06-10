@@ -225,7 +225,8 @@ class Configuration
         if ($this->queueConfigFile) {
             $this->logger->log("Loading config file: {$this->queueConfigFile}");
             try {
-                $this->queueConfig = Yaml::parse($this->queueConfigFile);
+                $config = file_get_contents($this->queueConfigFile);
+                $this->queueConfig = Yaml::parse($config);
             } catch (ParseException $e) {
                 $msg = "Invalid config file: ".$e->getMessage();
                 $this->logger->log($msg);
