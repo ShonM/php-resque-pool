@@ -8,6 +8,7 @@ class Worker
 
     public $queues;
     public $calledWork = 0;
+    public $strategy;
 
     public function __construct($queues)
     {
@@ -23,5 +24,10 @@ class Worker
     public function __toString()
     {
         return __CLASS__;
+    }
+
+    public function setJobStrategy($strategy)
+    {
+        $this->strategy = $strategy;
     }
 }

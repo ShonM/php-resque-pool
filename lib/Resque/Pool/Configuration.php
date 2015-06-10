@@ -89,7 +89,7 @@ class Configuration
      */
     protected $queueConfig;
 
-    protected $queueOptions;
+    protected $queueOptions = array();
 
     /**
      * @param array|string|null $config   Either a configuration array, path to yml
@@ -132,8 +132,6 @@ class Configuration
 
             if (isset($queue['workers'])) {
                 $this->queueConfig[$queue] = $config['workers'];
-            } else {
-                throw new \InvalidArgumentException('Configured pool queues must have a worker count defined');
             }
 
             if (isset($queue['options'])) {
@@ -174,7 +172,7 @@ class Configuration
 
     public function queueOptions($queue = null)
     {
-        if ($queue) {
+        if ($queue && isset($this->queueOptions[$queue])) {
             return $this->queueOptions[$queue];
         }
 
