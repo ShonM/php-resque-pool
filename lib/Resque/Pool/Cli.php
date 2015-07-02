@@ -105,7 +105,8 @@ class Cli
         }
         if ($pid) {
             // parent
-            echo "Started background process: $pid\n\n";
+            $myPid = getmypid();
+            echo "Started background process: $pid (from {$myPid})\n\n";
             exit(0);
         }
     }
