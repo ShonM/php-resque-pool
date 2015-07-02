@@ -122,7 +122,7 @@ class Cli
             } else {
                 unlink($pidfile);
             }
-        } elseif (!is_dir($piddir = basename($pidfile))) {
+        } elseif (!is_dir($piddir = dirname($pidfile))) {
             mkdir($piddir, 0777, true);
         }
 
