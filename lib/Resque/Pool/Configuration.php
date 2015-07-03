@@ -124,17 +124,21 @@ class Configuration
             $this->queueConfig = $this->queueConfig[$this->environment] + $this->queueConfig;
         }
 
+        if (isset($this->queueConfig['redis_prefix'])) {
+            \Resque_Redis::prefix($this->queueConfig['redis_prefix']);
+        }
+
         foreach ($this->queueConfig as $queue => $config) {
             // A standard queue configuration, like "foo: 2"
             if (! is_array($config)) {
                 continue;
             }
 
-            if (isset($queue['workers'])) {
+            if (isset($config['workers'])) {
                 $this->queueConfig[$queue] = $config['workers'];
             }
 
-            if (isset($queue['options'])) {
+            if (isset($config['options'])) {
                 $this->queueOptions[$queue] = $config['options'];
             }
         }
