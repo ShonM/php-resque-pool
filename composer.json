@@ -18,7 +18,7 @@
     "require": {
         "php": ">=5.3.0",
         "symfony/yaml": "~2.7,<3.0",
-        "shonm/php-resque": "dev-fastcgi#e122215"
+        "shonm/php-resque": "dev-fastcgi#f8fda170ee8ac07a33bf4d452acd3c01ce37965d"
     },
     "require-dev": {
         "phpunit/phpunit": "4.1.*"
