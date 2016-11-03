@@ -265,7 +265,6 @@ class Pool
         } elseif ($pid === 0) {
             $this->platform->releaseSignals();
             $worker = $this->createWorker($queues, $options);
-            $this->logger->logWorker("Starting worker $worker");
             $this->logger->procline("Starting worker $worker");
             $this->callAfterPrefork($worker);
             $worker->work($this->config->workerInterval);
@@ -294,8 +293,8 @@ class Pool
             $worker->logLevel = \Resque_Worker::LOG_NORMAL;
         }
 
-        $jobStrategy = isset($options['strategy']) ? $options['strategy'] : 'fork';
-        switch($jobStrategy) {
+        $jobStrategyName = isset($options['strategy']) ? $options['strategy'] : 'fork';
+        switch($jobStrategyName) {
             case 'fork':
                 $jobStrategy = new \Resque_JobStrategy_Fork();
                 break;
@@ -323,11 +322,13 @@ class Pool
                 $jobStrategy = new \Resque_JobStrategy_InProcess();
                 break;
             default:
-                throw new \InvalidArgumentException('The job strategy ' . $jobStrategy . ' does not exist');
+                throw new \InvalidArgumentException('The job strategy ' . $jobStrategyName . ' does not exist');
                 break;
         }
 
         $worker->setJobStrategy($jobStrategy);
+
+        $this->logger->logWorker("Starting worker {$worker} ({$jobStrategyName})");
 
         return $worker;
     }
