@@ -315,7 +315,8 @@ class Pool
                     array(
                         'BASE_DIR'    => $options['base_dir'],
                         'ENVIRONMENT' => $this->config->environment,
-                    )
+                    ),
+                    isset($options['extra']) ? $options['options'] : []
                 );
                 break;
             case 'inprocess':
