@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "80f196d4bfea4a1e94313da6a3904dff",
-    "content-hash": "3605f22c11b022c5d381afdcd96331c6",
+    "hash": "9c7db4e5135cee59b418d935f030857b",
+    "content-hash": "971641def6f1b54c1501867941e7cf6c",
     "packages": [
         {
             "name": "colinmollenhour/credis",
@@ -52,12 +52,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ShonM/php-resque.git",
-                "reference": "1f1b13033319c5e27a715e9e73fd1c8a48eb3f6f"
+                "reference": "4266f8973caf748190b674ebf66215f88a231f88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/1f1b13033319c5e27a715e9e73fd1c8a48eb3f6f",
-                "reference": "1f1b13033319c5e27a715e9e73fd1c8a48eb3f6f",
+                "url": "https://api.github.com/repos/ShonM/php-resque/zipball/4266f8973caf748190b674ebf66215f88a231f88",
+                "reference": "4266f8973caf748190b674ebf66215f88a231f88",
                 "shasum": ""
             },
             "require": {
@@ -100,7 +100,7 @@
                 "redis",
                 "resque"
             ],
-            "time": "2016-12-07 15:30:09"
+            "time": "2016-12-07 17:24:05"
         },
         {
             "name": "symfony/yaml",
@@ -760,16 +760,16 @@
         },
         {
             "name": "sebastian/recursion-context",
-            "version": "dev-master",
+            "version": "1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/recursion-context.git",
-                "reference": "2c3ba150cbec723aa057506e73a8d33bdb286c9a"
+                "reference": "b19cc3298482a335a95f3016d2f8a6950f0fbcd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/2c3ba150cbec723aa057506e73a8d33bdb286c9a",
-                "reference": "2c3ba150cbec723aa057506e73a8d33bdb286c9a",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/b19cc3298482a335a95f3016d2f8a6950f0fbcd7",
+                "reference": "b19cc3298482a335a95f3016d2f8a6950f0fbcd7",
                 "shasum": ""
             },
             "require": {
@@ -781,7 +781,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -809,7 +809,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "time": "2016-11-19 07:33:16"
+            "time": "2016-10-03 07:41:43"
         },
         {
             "name": "sebastian/version",
