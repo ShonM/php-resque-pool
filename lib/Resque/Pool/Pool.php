@@ -298,6 +298,10 @@ class Pool
             case 'fork':
                 $jobStrategy = new \Resque_JobStrategy_Fork();
                 break;
+            case 'batch':
+                $jobStrategy = new \Resque_JobStrategy_Batch($options['jobs_per_fork'] ?? 10);
+                $jobStrategy->setWorker($worker);
+                break;
             case 'fastcgi':
                 if (! isset($options['fastcgi_worker'])) {
                     throw new \InvalidArgumentException('The fastcgi strategy requires a fastcgi_worker key be defined with a valid filename');
