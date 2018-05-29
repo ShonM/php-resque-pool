@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "symfony/yaml": "~2.8|~3.0",
+        "symfony/yaml": "~2.8|~3.0|~4.0",
         "shonm/php-resque": "dev-fastcgi#7b1d7d5a91a943a3bc388ea8e1bee86ebbe5c850"
     },
     "require-dev": {
