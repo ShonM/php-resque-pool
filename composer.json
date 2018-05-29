@@ -4,7 +4,7 @@
     "description": "php-resque worker pool manager",
     "keywords": [],
     "homepage": "http://github.com/ShonM/php-resque-pool",
-    "license": "",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Erik Bernhardson",
