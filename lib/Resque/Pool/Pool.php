@@ -141,11 +141,15 @@ class Pool
             if ($delta > 0) {
                 while ($delta-- > 0) {
                     $this->spawnWorker($queues, $this->config->queueOptions($queues));
+
+                    usleep(50000); // 50ms
                 }
             } elseif ($delta < 0) {
                 $pids = array_slice($this->pidsFor($queues), 0, -$delta);
                 $this->platform->signalPids($pids, SIGQUIT);
             }
+
+            usleep(50000); // 50ms
         }
     }
 
